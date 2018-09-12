@@ -27,6 +27,18 @@ namespace TestNinja.UnitTests
         }
 
         [Test]
+        [Ignore("Preto!")] //ignorovanie testu - napr kvoli potrebe zrefaktorovania
+        [TestCase(2,1,2)]
+        [TestCase(1, 2, 2)]
+        [TestCase(1, 1, 1)]
+        public void Max_WhenCalled_ReturnTheGreaterAgument(int a, int b, int expectedResult)
+        {
+            var result = _math.Max(a, b);
+
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
+        [Test]
         public void Max_FirstArgumentIsGreater_ReturnTheFirstArgument()
         {
             var result = _math.Max(2, 1);
