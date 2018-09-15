@@ -61,5 +61,28 @@ namespace TestNinja.UnitTests
 
             Assert.That(result, Is.EqualTo(1));
         }
+
+        [Test]
+        public void GetOddNumber_LimitIsGreaterThanZero_ReturnOddNumbersUpToLimit()
+        {
+            var result = _math.GetOddNumbers(5);
+
+            //general
+            Assert.That(result, Is.Not.Empty); //pre overenie ze kolekcia nie je prazdna , v pripadoch kedy nie je potrebne testovat konkretne zaznamy kolekcie
+
+            //more specific
+            Assert.That(result.Count(), Is.EqualTo(3));  //pre overenie poctu zaznamov v kolekcii
+
+            //overenie konkretnych zaznamov
+            Assert.That(result, Does.Contain(1));
+            Assert.That(result, Does.Contain(3));
+            Assert.That(result, Does.Contain(5));
+            //alternativa
+            Assert.That(result, Is.EquivalentTo(new[] { 1, 3, 5 }));
+
+            Assert.That(result, Is.Ordered); // pre overenie ze vysledok je zoradeny
+
+            Assert.That(result, Is.Unique); // pre overenie ze vysledok je unikatny
+        }
     }
 }
