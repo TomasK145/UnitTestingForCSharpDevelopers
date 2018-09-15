@@ -36,5 +36,20 @@ namespace TestNinja.UnitTests
             //Assert.That(() => logger.Log(error), Throws.Exception.TypeOf<DivideByZeroException>()); //alternativa
         }
         //Pozn.: doveryhodnost testu mozeme overit zakomentovanim hodenia exception v testovanej metode a vtedy by mal aj test zlyhat
+
+        [Test]
+        public void Log_ValidError_RaiseErrorLoggedEvent()
+        {
+            var logger = new ErrorLogger();
+
+            var id = Guid.Empty;
+            logger.ErrorLogged += (sender, args) => { id = args; }; //(sender, args) => { }; --> reprezentuje event handler
+            //pre overenie, ci bol vramci nejakej metody fired event je mozne sa subscribnut tomuto eventu
+
+            logger.Log("a");
+
+            Assert.That(id, Is.Not.EqualTo(Guid.Empty));
+        }
+
     }
 }
