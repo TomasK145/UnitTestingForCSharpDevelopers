@@ -21,5 +21,20 @@ namespace TestNinja.UnitTests
 
             Assert.That(logger.LastError, Is.EqualTo("a"));
         }
+
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Log_InvalidError_ThrowArgumentNullException(string error)
+        {
+            var logger = new ErrorLogger();
+
+            //logger.Log(error); --> kedze tu by vznikla exception, je potrebne volat cez delegate
+
+            Assert.That(() => logger.Log(error), Throws.ArgumentNullException);
+            //Assert.That(() => logger.Log(error), Throws.Exception.TypeOf<DivideByZeroException>()); //alternativa
+        }
+        //Pozn.: doveryhodnost testu mozeme overit zakomentovanim hodenia exception v testovanej metode a vtedy by mal aj test zlyhat
     }
 }

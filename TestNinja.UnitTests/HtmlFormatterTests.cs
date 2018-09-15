@@ -19,7 +19,7 @@ namespace TestNinja.UnitTests
             var result = formatter.FormatAsBold("abc");
 
             //Specific 
-            Assert.That(result, Is.EqualTo("<string>abc</strong>").IgnoreCase); //vhodne ak chceme overit presny vystup z metody (pozor na zmeny vystupu testovanej metody)
+            Assert.That(result, Is.EqualTo("<strong>abc</strong>").IgnoreCase); //vhodne ak chceme overit presny vystup z metody (pozor na zmeny vystupu testovanej metody)
             //je mozne pridat metodu "IgnoreCase" pre ignorovanie malych/velkych pismen
 
             //more generic
