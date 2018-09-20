@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TestNinja.Fundamentals
 {
-    public class Stack<T>
+    public class Stack2<T>
     {
         private readonly List<T> _list = new List<T>();
 
@@ -12,8 +12,10 @@ namespace TestNinja.Fundamentals
         public void Push(T obj)
         {
             if (obj == null)
+            {
                 throw new ArgumentNullException();
-            
+            }
+
             _list.Add(obj);
         }
 
