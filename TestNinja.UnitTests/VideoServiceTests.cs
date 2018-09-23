@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,22 @@ namespace TestNinja.UnitTests
     [TestFixture]
     public class VideoServiceTests
     {
+        private VideoService _videoService;
+        private Mock<IFileReader> fileReader;
+
+        [SetUp]
+        public void SetUp()
+        {
+            fileReader = new Mock<IFileReader>(); //inicializacia mock objektu
+            _videoService = new VideoService(fileReader.Object);
+        }
+
         [Test]
         public void ReadVideoTitle_EmptyFile_ReturnError()
         {
-            var service = new VideoService(new FakeFileReader());
+            fileReader.Setup(fr => fr.Read("video.txt")).Returns("{\"Title\":\"error\"}"); //definovanie co sa ma stat ak je volana metoda Read s atributom "video.txt" --> vrati string "error"            
 
-            var result = service.ReadVideoTitle();
+            var result = _videoService.ReadVideoTitle();
 
             Assert.That(result, Does.Contain("error").IgnoreCase);
         }
